@@ -3,6 +3,7 @@ package com.example.ShoppingMall.config;
 
 import com.example.ShoppingMall.jwt.JwtTokenFilter;
 import com.example.ShoppingMall.jwt.JwtTokenUtils;
+import com.example.ShoppingMall.user.entity.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,10 +33,13 @@ public class WebSecurityConfig {
                                             "/users/register"
                                     )
                                     .anonymous();
-                            auth.requestMatchers("users/update-essential-info")
+                            auth.requestMatchers("/users/{userId}/updateEssentialInfo")
+                                    .authenticated();
+                            auth.requestMatchers("/users/{userId}/updateProfileImage")
                                     .authenticated();
                         }
                 )
+
 
                 // JWT를 사용하기 때문에 보안 관련 세션 해제
                 .sessionManagement(session -> session
