@@ -4,7 +4,6 @@ spring:
     driver-class-name: org.sqlite.JDBC
     username: sa
     password: password
-    initialization-mode: deferred
 
   jpa:
     hibernate:
