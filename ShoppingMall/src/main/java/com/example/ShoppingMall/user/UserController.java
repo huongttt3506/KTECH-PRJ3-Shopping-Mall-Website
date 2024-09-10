@@ -1,13 +1,12 @@
 package com.example.ShoppingMall.user;
 
 import com.example.ShoppingMall.jwt.dto.JwtResponseDto;
+import com.example.ShoppingMall.user.dto.EssentialInfoDto;
 import lombok.RequiredArgsConstructor;
 import com.example.ShoppingMall.user.dto.LoginDto;
 import com.example.ShoppingMall.user.dto.RegisterUserDto;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import com.example.ShoppingMall.user.dto.UserDto;
 
 @RestController
@@ -32,6 +31,16 @@ public class UserController {
     ) {
         return userService.userLogin(dto);
     }
+
+    // Endpoint updates essential information
+    @PatchMapping("/update-essential-info")
+    public ResponseEntity<UserDto> updateEssentialInfo(
+            @RequestBody EssentialInfoDto dto
+    ) {
+        UserDto updatedUser = userService.updateEssentialInfo(dto);
+        return ResponseEntity.ok(updatedUser);
+    }
+
 
 
 

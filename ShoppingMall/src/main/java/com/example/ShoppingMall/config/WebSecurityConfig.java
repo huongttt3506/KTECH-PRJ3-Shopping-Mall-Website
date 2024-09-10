@@ -27,12 +27,13 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         auth -> {
-                            auth
-                                    .requestMatchers(
+                            auth.requestMatchers(
                                             "/users/login",
                                             "/users/register"
                                     )
                                     .anonymous();
+                            auth.requestMatchers("users/update-essential-info")
+                                    .authenticated();
                         }
                 )
 

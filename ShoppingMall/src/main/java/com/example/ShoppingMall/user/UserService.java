@@ -1,6 +1,8 @@
 package com.example.ShoppingMall.user;
+import com.example.ShoppingMall.AuthenticationFacade;
 import com.example.ShoppingMall.jwt.JwtTokenUtils;
 import com.example.ShoppingMall.jwt.dto.JwtResponseDto;
+import com.example.ShoppingMall.user.dto.EssentialInfoDto;
 import com.example.ShoppingMall.user.dto.LoginDto;
 import com.example.ShoppingMall.user.dto.RegisterUserDto;
 import com.example.ShoppingMall.user.dto.UserDto;
@@ -23,6 +25,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenUtils jwtTokenUtils;
+    private final AuthenticationFacade facade;
 
     // Register user
     public UserDto registerUser(RegisterUserDto registerUserDto) {
@@ -50,7 +53,7 @@ public class UserService {
         return UserDto.fromEntity(newUser);
     }
 
-    // Generate jwt token base on Username, password
+    // Generate jwt token base on Username, password (user input)
     public JwtResponseDto userLogin(LoginDto loginDto) {
         // 1. Check if username exists
         Optional<UserEntity> optionalUser = userRepository.findByUsername(loginDto.getUsername());
@@ -71,4 +74,28 @@ public class UserService {
         responseDto.setToken(token);
         return responseDto;
     }
+
+    // Fill essential info to change from ROLE_INACTIVE to  ROLE_USER
+    public UserDto updateEssentialInfo(EssentialInfoDto dto) {
+        // 1. Get the current user from AuthenticationFacade
+        UserEntity userEntity = facade.getCurrentUserEntity();
+        //2. update essential info by get info from dto
+        userEntity.setNickname(dto.getNickname());
+        userEntity.setFirstName(dto.getFirstName());
+        userEntity.setLastName(dto.getLastName());
+        userEntity.setAgeGroup(dto.getAgeGroup());
+        userEntity.setEmail(dto.getEmail());
+        userEntity.setPhone(dto.getPhone());
+        //3. Change status of user role from ROLE_INACTIVE to ROLE_USER
+        if (userEntity.getRole().equals(UserRole.ROLE_INACTIVE)) {
+            userEntity.setRole(UserRole.ROLE_USER);
+        }
+        //4. Save and return updated user information
+        return UserDto.fromEntity(userRepository.save(userEntity));
+
+
+    }
+
+
+
 }
