@@ -1,15 +1,18 @@
 package com.example.ShoppingMall.user;
 
+import com.example.ShoppingMall.ShoppingMall.shop.dto.ShopDto;
 import com.example.ShoppingMall.jwt.dto.JwtResponseDto;
-import com.example.ShoppingMall.user.dto.EssentialInfoDto;
+import com.example.ShoppingMall.user.dto.*;
+import com.example.ShoppingMall.user.entity.BusinessRegistration;
 import lombok.RequiredArgsConstructor;
-import com.example.ShoppingMall.user.dto.LoginDto;
-import com.example.ShoppingMall.user.dto.RegisterUserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import com.example.ShoppingMall.user.dto.UserDto;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/users")
@@ -30,7 +33,8 @@ public class UserController {
             @RequestBody
             LoginDto dto
     ) {
-        return userService.userLogin(dto);
+       log.info("username login: {}", dto.getUsername());
+       return userService.userLogin(dto);
     }
 
     // Endpoint updates essential information
@@ -57,11 +61,48 @@ public class UserController {
     }
 
 
+    // ROLE_USER request to upgrade to ROLE_BUSINESS
+    @PostMapping("/{userId}/business")
+    public BusinessRegistrationDto businessRegister(
+            @PathVariable("userId") Long userId,
+            @RequestParam("business_number")
+            String businessNumber
+    ) {
+        return userService.businessRegister(businessNumber);
+    }
 
+    // ADMIN READ REGISTRATION REQUEST LIST
+    @GetMapping("/admin/business")
+    public List<BusinessRegistrationDto> readBusinessRegistrations() {
+        return userService.readBusinessRegistrations();
+    }
 
+    // READ ONE
+    @GetMapping("/admin/business/{id}")
+    public BusinessRegistrationDto readOneBusinessRegistration(
+            @PathVariable("id") Long id
+    ) {
+        return userService.readOneBusinessRegistration(id);
 
+    }
 
+    // Admin accept business registration request
+    // users/admin/business/1/accept
+    @PostMapping("/admin/business/{registrationId}/accept")
+    public String acceptBusinessRegistration(
+            @PathVariable("registrationId") Long id
+    ) {
+        userService.acceptBusinessRegistration(id);
+        return "done";
+    }
 
-
+    // Admin decline business registration request
+    @DeleteMapping("/admin/business/{BusinessRegId}/decline")
+    public String declineBusinessRegistration(
+            @PathVariable("BusinessRegId") Long id
+    ) {
+        userService.declineBusinessRegistration(id);
+        return "Business registration declined.";
+    }
 
 }

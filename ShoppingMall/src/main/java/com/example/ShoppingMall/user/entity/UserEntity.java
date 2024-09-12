@@ -1,7 +1,12 @@
 package com.example.ShoppingMall.user.entity;
 
+import com.example.ShoppingMall.ShoppingMall.shop.entity.ShopEntity;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -31,5 +36,13 @@ public class UserEntity {
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BusinessRegistration> businessRegistrations;
+
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Builder.Default
+    private List<ShopEntity> shops = new ArrayList<>();
 
 }

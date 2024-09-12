@@ -16,6 +16,7 @@ import java.util.Optional;
 @Slf4j
 @Component
 @RequiredArgsConstructor
+// a utility class to get current user information from SecurityContext in Spring Security
 public class AuthenticationFacade {
     private final UserRepository userRepository;
     public UserEntity getCurrentUserEntity() {

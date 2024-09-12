@@ -1,6 +1,8 @@
-package com.example.ShoppingMall.user.entity;
+package com.example.ShoppingMall.user.UserDetails;
 
 
+import com.example.ShoppingMall.user.entity.UserEntity;
+import com.example.ShoppingMall.user.entity.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -19,6 +21,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        //Returns user permissions based on RoleUser enum
         return Collections.singletonList(() -> userEntity.getRole().name());
     }
 

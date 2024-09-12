@@ -36,11 +36,11 @@
 
 ### 데이터베이스 테이블
 
-- [Entity Diagram](EntityDiagram.png): 데이터베이스 엔티티와 관계를 시각화한 다이어그램입니다.
+- [Entity Diagram](../../../docs/EntityDiagram.png): 데이터베이스 엔티티와 관계를 시각화한 다이어그램입니다.
 
 ### 워크플로우
 
-- [Workflow Diagram](WorkflowDiagram.md): 시스템 상호작용 및 주요 프로세스를 나타낸 다이어그램입니다.
+- [Workflow Diagram](../../../docs/WorkflowDiagram.md): 시스템 상호작용 및 주요 프로세스를 나타낸 다이어그램입니다.
 
 ### 패키지 구조
 
@@ -101,7 +101,7 @@
 ### 파일 링크
 
 - [Postman Collection](link-to-postman-collection)
-- [Entity Diagram](link-to-entity-diagram)
-- [Workflow Diagram](link-to-workflow-diagram)
+- [Entity Diagram](../../../docs/EntityDiagram.png)
+- [Workflow Diagram](../../../docs/WorkflowDiagram.md)
 - [패키지 구조 다이어그램](link-to-package-structure-diagram)
-- [README.md](link-to-readme-file)
+- [README.md](README.md)
