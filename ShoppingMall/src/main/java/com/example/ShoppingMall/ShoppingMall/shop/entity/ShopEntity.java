@@ -7,6 +7,7 @@ import lombok.*;
 import org.springframework.security.core.userdetails.User;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -33,7 +34,10 @@ public class ShopEntity {
     private UserEntity owner;
 
     // Business registration associated with this shop
-    @OneToOne(mappedBy = "shop")
-    private BusinessRegistration businessRegistration;
+    private String businessNum;
+
+    // List of close requests associated with this shop
+    @OneToMany(mappedBy = "shop")
+    private List<ShopCloseRequest> closeRequests;
 
 }

@@ -36,11 +36,11 @@
 
 ### 데이터베이스 테이블
 
-- [Entity Diagram](../../../docs/EntityDiagram.png): 데이터베이스 엔티티와 관계를 시각화한 다이어그램입니다.
+- [Entity Diagram](docs/EntityDiagram.png): 데이터베이스 엔티티와 관계를 시각화한 다이어그램입니다.
 
 ### 워크플로우
 
-- [Workflow Diagram](../../../docs/WorkflowDiagram.md): 시스템 상호작용 및 주요 프로세스를 나타낸 다이어그램입니다.
+- [Workflow Diagram](docs/WorkflowDiagram.md): 시스템 상호작용 및 주요 프로세스를 나타낸 다이어그램입니다.
 
 ### 패키지 구조
 
@@ -66,9 +66,9 @@
 
 ### 체크포인트
 
-- [ ] **사용자 인증 및 권한 처리**: JWT 토큰 기반 인증 구현
-- [ ] **회원가입**: 필수 정보 입력 및 프로필 이미지 업로드
-- [ ] **사용자 권한 관리**: 비활성 사용자, 일반 사용자, 사업자 사용자, 관리자 역할 관리
+- [x] **사용자 인증 및 권한 처리**: JWT 토큰 기반 인증 구현
+- [x] **회원가입**: 필수 정보 입력 및 프로필 이미지 업로드
+- [x] **사용자 권한 관리**: 비활성 사용자, 일반 사용자, 사업자 사용자, 관리자 역할 관리
 - [ ] **쇼핑몰 개설 및 관리**: 쇼핑몰 개설 요청 및 승인, 상품 등록, 수정, 삭제
 - [ ] **쇼핑몰 조회 및 상품 검색**: 비활성 사용자를 제외한 사용자 쇼핑몰 및 상품 검색
 - [ ] **상품 구매**: 구매 요청, 금액 전달, 재고 업데이트
@@ -101,7 +101,7 @@
 ### 파일 링크
 
 - [Postman Collection](link-to-postman-collection)
-- [Entity Diagram](../../../docs/EntityDiagram.png)
-- [Workflow Diagram](../../../docs/WorkflowDiagram.md)
+- [Entity Diagram](docs/EntityDiagram.png)
+- [Workflow Diagram](docs/WorkflowDiagram.md)
 - [패키지 구조 다이어그램](link-to-package-structure-diagram)
 - [README.md](README.md)

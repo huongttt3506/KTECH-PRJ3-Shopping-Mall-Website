@@ -24,8 +24,4 @@ public class BusinessRegistration {
     @Column(nullable = false)
     private String businessNum;
 
-    // One business registration corresponds to one shop
-    @OneToOne
-    @JoinColumn(name = "shop_id")
-    private ShopEntity shop;
 }

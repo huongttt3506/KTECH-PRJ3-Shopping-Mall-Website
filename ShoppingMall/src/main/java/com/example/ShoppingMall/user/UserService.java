@@ -160,23 +160,17 @@ public class UserService {
         UserEntity userEntity = facade.getCurrentUserEntity();
 
         //1. Check if the user has ROLE_USER to apply for business registration
-        if (!userEntity.getRole().equals(UserRole.ROLE_USER)) {
+        if (userEntity.getRole().equals(UserRole.ROLE_INACTIVE)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
-                    "Only ROLE_USER can apply for business registration");
+                    "Only ROLE_USER or ROLE_BUSINESS can apply for business registration");
         }
         log.info("user role: {}", userEntity.getRole());
 
         //2. Check if businessNum is existing
-        if (businessRepository.existsByBusinessNum(businessNum)) {
+        if (businessRepository.existsByBusinessNum(businessNum) || shopRepository.existsByBusinessNum(businessNum)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "This Business Number is exiting!");
         }
-
-//        boolean exists = businessRepository.existsByUserId(userEntity.getId());
-//        if (exists)
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-//                    "Business registration already exists for this user.");
-
         //3.  Create and save the business registration
         BusinessRegistration businessRegistration = BusinessRegistration.builder()
                 .user(userEntity)
@@ -251,24 +245,22 @@ public class UserService {
                 register.setRole(UserRole.ROLE_BUSINESS);
                 userRepository.save(register);
             }
-            // Remove the registration request
-            businessRepository.delete(registration);
-
             // Create a new shop for the upgraded user
             ShopEntity shop = ShopEntity.builder()
                     .status(ShopStatus.PREPARING)
                     .owner(register)
+                    .businessNum(registration.getBusinessNum())
                     .build();
             shopRepository.save(shop);
-
             // Add the new shop to the user's list of shops
             log.info("Shops before adding new shop: {}", register.getShops().size());
             register.getShops().add(shop);
             userRepository.save(register);
             log.info("Shops after adding new shop: {}", register.getShops().size());
-
-
             log.info("create new shop success!");
+
+            // Remove the registration request
+            businessRepository.delete(registration);
         } catch (Exception e) {
             log.error("Error accepting business registration: ", e);
             throw e;

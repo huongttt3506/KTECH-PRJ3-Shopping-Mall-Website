@@ -51,7 +51,7 @@ public class WebSecurityConfig {
                                             "/users/register"
                                     )
                                     .anonymous();
-
+                            // Endpoints accessible only by authenticated users
                             auth.requestMatchers("/users/{userId}/updateEssentialInfo")
                                     .authenticated();
 
@@ -61,10 +61,38 @@ public class WebSecurityConfig {
                             auth.requestMatchers("/users/{userId}/business")
                                     .authenticated();
 
+                            // Endpoints accessible only by admins
                             auth.requestMatchers("/users/admin/**")
                                     .authenticated();
 
+                            // Endpoints for ShopController
+                            auth.requestMatchers(
+                                    // read
+                                    "/shops",
+                                    "/shops/{shopId}",
+                                    //update info
+                                    "/shops/{shopId}/update-info",
+                                    // shop register request
+                                    "/shops/{shopId}/register",
+                                    // read register request
+                                    "/shops/registrations",
+                                    "/shops/registrations/{shopRegId}",
+                                    // admin approval
+                                    "/shops/registrations/{shopRegId}/accept",
+                                    //admin decline
+                                    "/shops//registrations/{shopRegId}/decline",
+                                    //shop close request
+                                    "/shops/close/{shopId}",
+                                    //view
+                                    "/shops/close-requests",
+                                    "/shops/close-requests/{closeReqId}",
+                                    //admin approve
+                                    "shops/close-requests/{closeReqId}/approve",
+                                    //search shop
+                                    "/shops/search"
+                            ).authenticated(); // Allow all authenticated users
 
+                            // All different endpoints:
                             auth.anyRequest().authenticated();
                         }
                 )

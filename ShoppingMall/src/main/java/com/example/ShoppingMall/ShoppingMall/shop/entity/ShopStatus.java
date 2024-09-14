@@ -1,2 +1,7 @@
-package com.example.ShoppingMall.ShoppingMall.shop.entity;public enum ShopStatus {
+package com.example.ShoppingMall.ShoppingMall.shop.entity;
+
+public enum ShopStatus {
+    PREPARING,
+    OPEN,
+    CLOSED
 }
