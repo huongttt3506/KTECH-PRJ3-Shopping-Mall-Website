@@ -1,8 +1,7 @@
-package com.example.ShoppingMall.ShoppingMall.order.entity;
+package com.example.ShoppingMall.Market.order.entity;
 
 public enum OrderStatus {
     PENDING,
-    PAID,
-    DELIVERED,
+    CONFIRMED,
     CANCELED
 }

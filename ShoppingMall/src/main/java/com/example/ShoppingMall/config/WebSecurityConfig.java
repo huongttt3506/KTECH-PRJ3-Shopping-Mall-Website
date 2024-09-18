@@ -91,6 +91,23 @@ public class WebSecurityConfig {
                                     //search shop
                                     "/shops/search"
                             ).authenticated(); // Allow all authenticated users
+                            //endpoint for items
+                            auth.requestMatchers("/items/add," +
+                                    "items/{itemId}/view",
+                                    "items/{itemId}/update",
+                                    "items/{itemId}/delete",
+                                    "items/admin",
+                                    "items/{shopId}").authenticated();
+                            //endpoint for order item
+                            auth.requestMatchers("/order",
+                                    "/order/user",
+                                    "/order/shop/{shopId}",
+                                    "/order/{orderId}",
+                                    "/order/{orderId}/confirm",
+                                    "/order/{orderId}/cancel"
+                                    ).authenticated();
+                            //endpoint for cart
+
 
                             // All different endpoints:
                             auth.anyRequest().authenticated();

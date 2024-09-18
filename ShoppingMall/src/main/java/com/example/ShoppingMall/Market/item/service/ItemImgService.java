@@ -1,4 +1,4 @@
-package com.example.ShoppingMall.Market.item;
+package com.example.ShoppingMall.Market.item.service;
 
 import com.example.ShoppingMall.Market.item.entity.ItemImg;
 import com.example.ShoppingMall.Market.item.repo.ItemImgRepository;
@@ -7,11 +7,9 @@ import com.example.ShoppingMall.service.FileService;
 import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

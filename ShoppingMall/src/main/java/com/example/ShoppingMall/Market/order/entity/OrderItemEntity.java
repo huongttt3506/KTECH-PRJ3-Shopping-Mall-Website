@@ -1,12 +1,9 @@
-package com.example.ShoppingMall.ShoppingMall.order.entity;
+package com.example.ShoppingMall.Market.order.entity;
 
-import com.example.ShoppingMall.ShoppingMall.item.entity.ItemEntity;
-import com.example.ShoppingMall.ShoppingMall.shop.entity.ShopEntity;
+import com.example.ShoppingMall.Market.item.entity.ItemEntity;
+import com.example.ShoppingMall.Market.shop.entity.ShopEntity;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.math.BigDecimal;
-import java.util.List;
 
 @Getter
 @Setter
@@ -14,6 +11,8 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+
+//OrderItem: Manage specific products in an order.
 public class OrderItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,5 +31,22 @@ public class OrderItemEntity {
     private ShopEntity shop;
 
     private int quantity;
-    private BigDecimal itemPrice;
+    private int itemPrice;
+    private int price;
+
+    public int getTotalPrice() {
+        return price * quantity;
+    }
+    public static OrderItemEntity createOrderItem(ItemEntity item, int quantity){
+
+        OrderItemEntity orderItem = new OrderItemEntity();
+        orderItem.setItem(item);
+        orderItem.setQuantity(quantity);
+        orderItem.setPrice(item.getPrice());
+        item.removeStock(quantity);
+        return orderItem;
+    }
+    public void cancel() {
+        this.getItem().addStock(quantity);
+    }
 }

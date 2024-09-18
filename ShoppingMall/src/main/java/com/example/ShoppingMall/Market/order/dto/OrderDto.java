@@ -1,13 +1,13 @@
-package com.example.ShoppingMall.ShoppingMall.order.dto;
+package com.example.ShoppingMall.Market.order.dto;
 
-import com.example.ShoppingMall.ShoppingMall.order.entity.OrderEntity;
-import com.example.ShoppingMall.ShoppingMall.order.entity.OrderStatus;
+import com.example.ShoppingMall.Market.order.entity.OrderEntity;
+import com.example.ShoppingMall.Market.order.entity.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -18,20 +18,22 @@ import java.util.stream.Collectors;
 public class OrderDto {
     private Long id;
     private Long userId;
-    private OrderStatus status;
+    private LocalDateTime orderDate;
+    private OrderStatus orderStatus;
     private Set<OrderItemDto> orderItems;
-    private BigDecimal totalPrice;
+    private int totalAmount;
     private Long shopId;
 
     public static OrderDto fromEntity(OrderEntity orderEntity) {
         return OrderDto.builder()
                 .id(orderEntity.getId())
                 .userId(orderEntity.getUser().getId())
-                .status(orderEntity.getStatus())
+                .orderDate(orderEntity.getOrderDate())
+                .orderStatus(orderEntity.getOrderStatus())
                 .orderItems(orderEntity.getOrderItems().stream()
                         .map(OrderItemDto::fromEntity)
                         .collect(Collectors.toSet()))
-                .totalPrice(orderEntity.getTotalPrice())
+                .totalAmount(orderEntity.getTotalAmount())
                 .shopId(orderEntity.getShop().getId())
                 .build();
     }

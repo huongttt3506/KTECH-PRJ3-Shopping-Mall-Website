@@ -5,6 +5,7 @@ import com.example.ShoppingMall.Market.item.dto.ItemDto;
 import com.example.ShoppingMall.Market.item.dto.ItemFormDto;
 import com.example.ShoppingMall.Market.item.dto.ItemSearchDto;
 import com.example.ShoppingMall.Market.item.entity.ItemEntity;
+import com.example.ShoppingMall.Market.item.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -77,9 +77,9 @@ public class ItemController {
 
     // DELETE
     @DeleteMapping("/{itemId}/delete")
-    public ResponseEntity<Void> deleteItem(@PathVariable Long itemId) throws Exception {
+    public ResponseEntity<String> deleteItem(@PathVariable Long itemId) throws Exception {
         itemService.deleteItem(itemId);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("Item deleted successfully");
     }
 
 }

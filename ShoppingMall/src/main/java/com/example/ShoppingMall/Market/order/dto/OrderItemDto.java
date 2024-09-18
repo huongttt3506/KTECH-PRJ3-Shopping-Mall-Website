@@ -1,6 +1,6 @@
-package com.example.ShoppingMall.ShoppingMall.order.dto;
+package com.example.ShoppingMall.Market.order.dto;
 
-import com.example.ShoppingMall.ShoppingMall.order.entity.OrderItemEntity;
+import com.example.ShoppingMall.Market.order.entity.OrderItemEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,7 +17,7 @@ public class OrderItemDto {
     private Long itemId;
     private Long shopId;
     private int quantity;
-    private BigDecimal itemPrice;
+    private int itemPrice;
 
     public static OrderItemDto fromEntity(OrderItemEntity orderItemEntity) {
         return OrderItemDto.builder()
