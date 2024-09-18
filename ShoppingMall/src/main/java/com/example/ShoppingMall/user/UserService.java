@@ -1,8 +1,9 @@
 package com.example.ShoppingMall.user;
 import com.example.ShoppingMall.AuthenticationFacade;
-import com.example.ShoppingMall.ShoppingMall.shop.entity.ShopEntity;
-import com.example.ShoppingMall.ShoppingMall.shop.entity.ShopStatus;
-import com.example.ShoppingMall.ShoppingMall.shop.repo.ShopRepository;
+import com.example.ShoppingMall.service.FileService;
+import com.example.ShoppingMall.Market.shop.entity.ShopEntity;
+import com.example.ShoppingMall.Market.shop.entity.ShopStatus;
+import com.example.ShoppingMall.Market.shop.repo.ShopRepository;
 import com.example.ShoppingMall.jwt.JwtTokenUtils;
 import com.example.ShoppingMall.jwt.dto.JwtResponseDto;
 import com.example.ShoppingMall.user.dto.*;
@@ -38,6 +39,7 @@ public class UserService {
     private final AuthenticationFacade facade;
     private final BusinessRepository businessRepository;
     private final ShopRepository shopRepository;
+    private final FileService fileService;
 
     // Register user
     public UserDto registerUser(RegisterUserDto registerUserDto) {
@@ -109,49 +111,88 @@ public class UserService {
     }
 
     // UPDATE Profile Image
-    public UserDto updateProfileImg(Long id, MultipartFile image)  {
-        // 1. 유저가 존재하는지 확인한다.
+    public UserDto updateProfileImg(Long id, MultipartFile image) throws Exception {
+        // 1. Check if the user exists
         Optional<UserEntity> optionalUser = userRepository.findById(id);
-        if (optionalUser.isEmpty())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-
-        // 2. 파일의 업로드 위치를 결정한다.
-        // 추천: media/{userId}/profile.png|jpeg
-        //2.1 profile image folder 확인 및 생선
-        String profileDirectory = "media/" + id + "/"; //media/{userId}
-        try {
-            Files.createDirectories(Path.of(profileDirectory));}
-        catch (IOException e) {
-            System.out.println(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        if (optionalUser.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
         }
-        //2.2. 업로드란 파일의 확장자를 추출한다
-        String originalFilename = image.getOriginalFilename();
-        String[] filenameSplit = originalFilename.split("\\.");
-        // fish.pag -> filenameSplit = {"fish", "png"}
-        // blue.whale.png -> filenameSplit = {"blue", "whale", "png"}
-        String extension = filenameSplit[filenameSplit.length - 1];
-        //2.3 실제 위치에 파일을 저장한다
-        // media/1/profile.png
-        // media/2/profile.png
-        String uploadPath = profileDirectory + "profile." + extension;
+
+        // 2. Determine the upload directory for the profile image
+        String profileDirectory = "media/" + id + "/"; // media/{userId}
+
+        // 2.1 Check and create the profile image folder if it doesn't exist
         try {
-            image.transferTo(Path.of(uploadPath));
+            Files.createDirectories(Path.of(profileDirectory));
         } catch (IOException e) {
             System.out.println(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error creating profile directory");
         }
 
-        // 3. 업로드에 성공하면, 이미지 URL을 Entity에 저장한다.
-        // http://localhost:8080/static/{userId}/profile.png|jpeg
-        String reqPath = "/static/" + id + "/profile." + extension;
-        UserEntity target = optionalUser.get();
-        target.setProfileImagePath(reqPath);
+        // 2.2 Extract the file extension from the uploaded file
+        String originalFilename = image.getOriginalFilename();
+        String[] filenameSplit = originalFilename.split("\\.");
+        String extension = filenameSplit[filenameSplit.length - 1]; // Get the extension from the original file name
 
-        // 4. User Entity를 DTO로 변환해서 반환한다.
+        // 2.3 Use the FileService to save the profile image
+        String uploadPath = profileDirectory + "profile." + extension; // Full path to save the profile image
+        String savedFileName = fileService.uploadFile(profileDirectory, originalFilename, image.getBytes()); // Save the file using FileService
+
+        // 3. If upload is successful, save the image URL to the user entity
+        // e.g. http://localhost:8080/static/{userId}/profile.png|jpeg
+        String reqPath = "/static/" + id + "/" + savedFileName; // Create the URL for accessing the uploaded image
+        UserEntity target = optionalUser.get(); // Retrieve the user entity
+        target.setProfileImagePath(reqPath); // Set the new profile image path
+
+        // 4. Save the updated user entity and return it as a DTO
         return UserDto.fromEntity(userRepository.save(target));
-
     }
+
+
+//    // UPDATE Profile Image
+//    public UserDto updateProfileImg(Long id, MultipartFile image)  {
+//        // 1. 유저가 존재하는지 확인한다.
+//        Optional<UserEntity> optionalUser = userRepository.findById(id);
+//        if (optionalUser.isEmpty())
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+//
+//        // 2. 파일의 업로드 위치를 결정한다.
+//        // 추천: media/{userId}/profile.png|jpeg
+//        //2.1 profile image folder 확인 및 생선
+//        String profileDirectory = "media/" + id + "/"; //media/{userId}
+//        try {
+//            Files.createDirectories(Path.of(profileDirectory));}
+//        catch (IOException e) {
+//            System.out.println(e.getMessage());
+//            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//        //2.2. 업로드란 파일의 확장자를 추출한다
+//        String originalFilename = image.getOriginalFilename();
+//        String[] filenameSplit = originalFilename.split("\\.");
+//        // fish.pag -> filenameSplit = {"fish", "png"}
+//        // blue.whale.png -> filenameSplit = {"blue", "whale", "png"}
+//        String extension = filenameSplit[filenameSplit.length - 1];
+//        //2.3 실제 위치에 파일을 저장한다
+//        // media/1/profile.png
+//        // media/2/profile.png
+//        String uploadPath = profileDirectory + "profile." + extension;
+//        try {
+//            image.transferTo(Path.of(uploadPath));
+//        } catch (IOException e) {
+//            System.out.println(e.getMessage());
+//            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//
+//        // 3. 업로드에 성공하면, 이미지 URL을 Entity에 저장한다.
+//        // http://localhost:8080/static/{userId}/profile.png|jpeg
+//        String reqPath = "/static/" + id + "/profile." + extension;
+//        UserEntity target = optionalUser.get();
+//        target.setProfileImagePath(reqPath);
+//
+//        // 4. User Entity를 DTO로 변환해서 반환한다.
+//        return UserDto.fromEntity(userRepository.save(target));
+//
+//    }
 
     // Change from ROLE_USER -> ROLE_BUSINESS
     // I- Business Register Method

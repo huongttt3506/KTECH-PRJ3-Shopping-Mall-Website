@@ -1,13 +1,10 @@
 package com.example.ShoppingMall.user;
 
-import com.example.ShoppingMall.ShoppingMall.shop.dto.ShopDto;
 import com.example.ShoppingMall.jwt.dto.JwtResponseDto;
 import com.example.ShoppingMall.user.dto.*;
-import com.example.ShoppingMall.user.entity.BusinessRegistration;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -52,7 +49,7 @@ public class UserController {
     public ResponseEntity<UserDto> updateProfileImage(
             @PathVariable Long userId,
             @RequestParam("image") MultipartFile image
-    ) {
+    ) throws Exception {
         log.info("Request to upload profile img for user: {}", userId);
         log.info("File name: {}", image.getOriginalFilename());
 

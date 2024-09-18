@@ -1,6 +1,5 @@
 package com.example.ShoppingMall.user.dto;
 
-import com.example.ShoppingMall.ShoppingMall.shop.dto.ShopDto;
 import com.example.ShoppingMall.user.entity.BusinessRegistration;
 import lombok.*;
 

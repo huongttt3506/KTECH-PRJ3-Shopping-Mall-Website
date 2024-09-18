@@ -1,8 +1,5 @@
 package com.example.ShoppingMall.user.entity;
 
-import com.example.ShoppingMall.ShoppingMall.shop.entity.ShopEntity;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 

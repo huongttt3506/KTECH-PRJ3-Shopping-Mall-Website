@@ -1,6 +1,6 @@
 package com.example.ShoppingMall.user.entity;
 
-import com.example.ShoppingMall.ShoppingMall.shop.entity.ShopEntity;
+import com.example.ShoppingMall.Market.shop.entity.ShopEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
