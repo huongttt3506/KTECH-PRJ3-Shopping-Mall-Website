@@ -1,4 +1,6 @@
 # Workflow Diagram
+## Web Security Workflow
+![Web security workflow](WebSecurityConfigWorkflow.png)
 
 ## User Registration and Login Workflow
 ### User Registration Workflow
@@ -8,12 +10,11 @@
 
 ## API Request Workflow
 ![API Request Workflow](APIRequestWorkflow.png)
+### Update essential info workflow
+![Update essential info workflow](UpdateEssentialInfoWorkflow.png)
+### Update Profile Image Workflow
+![Upload Profile Image Process](UploadProfileImageProcess.png)
 
-## Shop Creation and Approval
 
-
-## Product Purchase
-
-## Product Search
-
-## Product Management (Add/Update/Delete Products)
+## Purchasing Process And Order Management
+![Purchasing Process And Order Management](PurchasingProcessAndOrderManagement.png)
