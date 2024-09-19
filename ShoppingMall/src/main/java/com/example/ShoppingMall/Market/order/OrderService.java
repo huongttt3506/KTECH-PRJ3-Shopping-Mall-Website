@@ -55,6 +55,7 @@ public class OrderService {
 
             OrderItemEntity orderItem = OrderItemEntity.createOrderItem(item, orderItemRequestDto.getQuantity());
             ShopEntity shop = item.getShop();
+            orderItem.setShop(shop);
 
             itemsByShop.computeIfAbsent(shop, k -> new ArrayList<>()).add(orderItem);
         }

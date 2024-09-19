@@ -6,6 +6,7 @@ import com.example.ShoppingMall.Market.item.dto.ItemFormDto;
 import com.example.ShoppingMall.Market.item.dto.ItemSearchDto;
 import com.example.ShoppingMall.Market.item.entity.ItemEntity;
 import com.example.ShoppingMall.Market.item.service.ItemService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -82,4 +83,13 @@ public class ItemController {
         return ResponseEntity.ok("Item deleted successfully");
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<ItemDto>> searchItems(
+            @RequestParam(required = false) Long shopId,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Integer minPrice,
+            @RequestParam(required = false) Integer maxPrice) {
+        List<ItemDto> items = itemService.searchItems(shopId, name, minPrice, maxPrice);
+        return ResponseEntity.ok(items);
+    }
 }

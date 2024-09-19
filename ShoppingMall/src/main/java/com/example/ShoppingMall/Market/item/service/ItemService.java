@@ -220,6 +220,17 @@ public class ItemService {
         // Delete item
         itemRepository.deleteById(itemId);
     }
+    @Transactional(readOnly = true)
+    public List<ItemDto> searchItems(
+            Long shopId,
+            String name,
+            Integer minPrice,
+            Integer maxPrice
+    ) {
+        List<ItemEntity> items = itemRepository.searchItems(shopId, name, minPrice, maxPrice);
+        return items.stream().map(ItemDto::fromEntity).collect(Collectors.toList());
+    }
+
 
 
 }

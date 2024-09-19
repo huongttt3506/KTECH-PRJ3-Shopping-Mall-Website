@@ -25,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
-
+import java.util.stream.Collectors;
 
 
 @Service
@@ -126,45 +126,87 @@ public class CartService {
 
     // Method to process the cart and convert it to a list of OrderItemEntity
     @Transactional
-    public List<Long> orderCartItem(CartOrderDto cartOrderDto) {
-        // Check permission
+    public List<Long> orderCart(Long cartId) {
         UserEntity currentUser = facade.getCurrentUserEntity();
         if (currentUser.getRole().equals(UserRole.ROLE_INACTIVE)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
                     "You must update essential information to activate your account.");
         }
 
-        // Retrieve the user's cart
-        CartEntity cart = cartRepository.findByUser(currentUser)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cart not found for the user"));
+        // find cart info by cart id
+        CartEntity cart = cartRepository.findById(cartId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cart not found for the given ID"));
 
-        // Create OrderItemRequestDto set from CartOrderDto list
-        Set<OrderItemRequestDto> orderItemRequestDtoSet = new HashSet<>();
-        for (CartItemDto cartItemDto : cartOrderDto.getCartItems()) {
-            // Retrieve item entity from cartItemDto
-            ItemEntity item = itemRepository.findById(cartItemDto.getItemId())
-                    .orElseThrow(() -> new EntityNotFoundException("Item not found"));
-
-            // Create OrderItemRequestDto from CartItemDto
-            OrderItemRequestDto orderItemRequestDto = new OrderItemRequestDto();
-            orderItemRequestDto.setItemId(cartItemDto.getItemId());
-            orderItemRequestDto.setQuantity(cartItemDto.getQuantity());
-
-            // Add to orderItemRequestDtoSet
-            orderItemRequestDtoSet.add(orderItemRequestDto);
+        // Check cart owner
+        if (!cart.getUser().equals(currentUser)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN,
+                    "You are not authorized to access this cart");
         }
 
-        // Create RequestOrderDto from the set
-        RequestOrderDto requestOrderDto = new RequestOrderDto();
-        requestOrderDto.setOrderItems(orderItemRequestDtoSet);  // Set used here
+        // create OrderItemRequestDto from cart
+        Set<OrderItemRequestDto> orderItemRequestDtoSet =
+                cartItemRepository.findByCart(cart).stream()
+                .map(cartItem -> {
+                    OrderItemRequestDto dto = new OrderItemRequestDto();
+                    dto.setItemId(cartItem.getItem().getId());
+                    dto.setQuantity(cartItem.getQuantity());
+                    return dto;
+                })
+                .collect(Collectors.toSet());
 
-        // Create orders for each shop
+        // create RequestOrderDto from set
+        RequestOrderDto requestOrderDto = new RequestOrderDto();
+        requestOrderDto.setOrderItems(orderItemRequestDtoSet);
+
+        //create order for each shop
         List<Long> orderIds = orderService.createOrdersForEachShop(requestOrderDto);
 
-        // Clear the cart after order is placed
+        // delete cart after order
         cartItemRepository.deleteByCart(cart);
 
-        return orderIds;  // Return the list of order IDs after processing
+        return orderIds;
     }
+
+//    @Transactional
+//    public List<Long> orderCartItem(CartOrderDto cartOrderDto) {
+//        // Check permission
+//        UserEntity currentUser = facade.getCurrentUserEntity();
+//        if (currentUser.getRole().equals(UserRole.ROLE_INACTIVE)) {
+//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
+//                    "You must update essential information to activate your account.");
+//        }
+//
+//        // Retrieve the user's cart
+//        CartEntity cart = cartRepository.findByUser(currentUser)
+//                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cart not found for the user"));
+//
+//        // Create OrderItemRequestDto set from CartOrderDto list
+//        Set<OrderItemRequestDto> orderItemRequestDtoSet = new HashSet<>();
+//        for (CartItemDto cartItemDto : cartOrderDto.getCartItems()) {
+//            // Retrieve item entity from cartItemDto
+//            ItemEntity item = itemRepository.findById(cartItemDto.getItemId())
+//                    .orElseThrow(() -> new EntityNotFoundException("Item not found"));
+//
+//            // Create OrderItemRequestDto from CartItemDto
+//            OrderItemRequestDto orderItemRequestDto = new OrderItemRequestDto();
+//            orderItemRequestDto.setItemId(cartItemDto.getItemId());
+//            orderItemRequestDto.setQuantity(cartItemDto.getQuantity());
+//
+//            // Add to orderItemRequestDtoSet
+//            orderItemRequestDtoSet.add(orderItemRequestDto);
+//        }
+//
+//        // Create RequestOrderDto from the set
+//        RequestOrderDto requestOrderDto = new RequestOrderDto();
+//        requestOrderDto.setOrderItems(orderItemRequestDtoSet);  // Set used here
+//
+//        // Create orders for each shop
+//        List<Long> orderIds = orderService.createOrdersForEachShop(requestOrderDto);
+//
+//        // Clear the cart after order is placed
+//        cartItemRepository.deleteByCart(cart);
+//
+//        return orderIds;  // Return the list of order IDs after processing
+//    }
 
 }

@@ -1,0 +1,1565 @@
+{
+	"info": {
+		"_postman_id": "9616d3ff-af76-4f6b-9c89-09188beac9d1",
+		"name": "KTECH-PROJECT3-SHOPPING-MALL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37757036"
+	},
+	"item": [
+		{
+			"name": "USER",
+			"item": [
+				{
+					"name": "User Register & Login",
+					"item": [
+						{
+							"name": "User Register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"user5\",\r\n  \"password\": \"12345\",\r\n  \"confirmPassword\": \"12345\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/users/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin Login",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcyNDgzMTU0MiwiZXhwIjoxNzI0ODM1MTQyfQ.rkHstqHIitJPnRe7YfUC68iu9XZIECoLgYtGSAl1rev4wjsdHUjuijtTbYicYhuI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"12345\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/users/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User Login",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcyNDgzMTU0MiwiZXhwIjoxNzI0ODM1MTQyfQ.rkHstqHIitJPnRe7YfUC68iu9XZIECoLgYtGSAl1rev4wjsdHUjuijtTbYicYhuI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"user1\",\r\n    \"password\": \"12345\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/users/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "User Regiter and Login\n\nPOST /users/register\n\nPOST / users/login"
+				},
+				{
+					"name": "User profile info update",
+					"item": [
+						{
+							"name": "Update essential info of Admin",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjU3OTE4NSwiZXhwIjoxNzI2NTgyNzg1LCJyb2xlIjoiUk9MRV9BRE1JTiJ9.rKJyXQ9wu9gX5VsK9ynqnLtmhR7gzEXes6P9utKsh3U",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nickname\": \"amin\",\r\n  \"firstName\": \"Huong\",\r\n  \"lastName\": \"Tran\",\r\n  \"ageGroup\": 30,\r\n  \"email\": \"admin@example.com\",\r\n  \"phone\": \"123-456-2120\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/users/1/updateEssentialInfo",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"1",
+										"updateEssentialInfo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User update essential info",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMyIsImlhdCI6MTcyNjU3ODkxMiwiZXhwIjoxNzI2NTgyNTEyLCJyb2xlIjoiUk9MRV9JTkFDVElWRSJ9.MMbKUiYpbsEG8lZBWgPVPGRfq6VOmX6I3seKzxPdBPM",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n    \"username\": \"user3\",\r\n    \"firstName\": \"Lohan\",\r\n    \"lastName\": \"Rose\",\r\n    \"ageGroup\": \"30\",\r\n    \"email\": \"lohan@gmail.com\",\r\n    \"phone\": \"+1-202-555-890\"\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/users/4/updateEssentialInfo",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"4",
+										"updateEssentialInfo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin update profile image",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjU3OTE4NSwiZXhwIjoxNzI2NTgyNzg1LCJyb2xlIjoiUk9MRV9BRE1JTiJ9.rKJyXQ9wu9gX5VsK9ynqnLtmhR7gzEXes6P9utKsh3U",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/teisspi/OneDrive/Pictures/icon/chicken2.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/users/1/updateProfileImage",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"1",
+										"updateProfileImage"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "user update profile image",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMyIsImlhdCI6MTcyNjU3ODkxMiwiZXhwIjoxNzI2NTgyNTEyLCJyb2xlIjoiUk9MRV9JTkFDVElWRSJ9.MMbKUiYpbsEG8lZBWgPVPGRfq6VOmX6I3seKzxPdBPM",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/teisspi/OneDrive/Pictures/Coloring/86.rabbit-coloring-page.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/users/2/updateProfileImage",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"2",
+										"updateProfileImage"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "After update essential information, user with ROLE_INACTIVE will be upgrated to ROLE_USER and can use this shopping mall web.\n\n- Update essential info: PATCH /{userId}/updateEssentialInfo\n    \n- Update profile image: PUT /users/{userId}/updateProfileImage"
+				},
+				{
+					"name": "Business Registration And Approve - Decline",
+					"item": [
+						{
+							"name": "Business Registration Request",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcyNjU3ODU4NCwiZXhwIjoxNzI2NTgyMTg0LCJyb2xlIjoiUk9MRV9VU0VSIn0.Pn04iadulNU92yo8RkLnAx4OKXf1ElXJZbHBDTvbA0Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/users/2/business?business_number=BN282333133",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"2",
+										"business"
+									],
+									"query": [
+										{
+											"key": "business_number",
+											"value": "BN282333133"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "READ ALL Business Registration",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjU4MTU1MSwiZXhwIjoxNzI2NTg1MTUxLCJyb2xlIjoiUk9MRV9BRE1JTiJ9.HBja42yDjSpnA7WeHDQ38fmOhYiarMSwQla-DM6W86Q",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/users/admin/business",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"admin",
+										"business"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "READ ONE Business Registration",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjU3OTQ5MCwiZXhwIjoxNzI2NTgzMDkwLCJyb2xlIjoiUk9MRV9BRE1JTiJ9.13WB9Jz7VAbQksg0Bmd4zcRVGiRVdBnStdDTpIqZrSU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/users/admin/business/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"admin",
+										"business",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin Accept Business Registration",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjU4MTU1MSwiZXhwIjoxNzI2NTg1MTUxLCJyb2xlIjoiUk9MRV9BRE1JTiJ9.HBja42yDjSpnA7WeHDQ38fmOhYiarMSwQla-DM6W86Q",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/users/admin/business/3/accept",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"admin",
+										"business",
+										"3",
+										"accept"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin decline Business Registration",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjU3OTQ5MCwiZXhwIjoxNzI2NTgzMDkwLCJyb2xlIjoiUk9MRV9BRE1JTiJ9.13WB9Jz7VAbQksg0Bmd4zcRVGiRVdBnStdDTpIqZrSU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/users/admin/business/2/decline",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"admin",
+										"business",
+										"2",
+										"decline"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "- User with ROLE_USER can upgrade to ROLE_BUSINESS\n    \n- One BusinessNum -> one new Shop created with default status: \"PENDING\"\n    \n- When Admin approve Business Registration shop status change to \"PREPARING\"\n    \n- And owner can update infomation.\n    \n- After shop owner update shop basic information. Owner can create a shop registration requestion to OPEN shop."
+				}
+			],
+			"description": "There is API test for User activity like:\n\n- Register\n    \n- Login\n    \n- Update profile\n    \n- Business Registration\n    \n- Admin approve/decline Business Registration"
+		},
+		{
+			"name": "SHOP",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Read All shop registration",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjU4MDk3NCwiZXhwIjoxNzI2NTg0NTc0LCJyb2xlIjoiUk9MRV9BRE1JTiJ9.K0NCOlgXdrSkcOyqmbLoaRntYBIYCA7oeXeLLgO2prw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/shops/registrations",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"shops",
+										"registrations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Read one shop registration",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjU4MDk3NCwiZXhwIjoxNzI2NTg0NTc0LCJyb2xlIjoiUk9MRV9BRE1JTiJ9.K0NCOlgXdrSkcOyqmbLoaRntYBIYCA7oeXeLLgO2prw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/shops/registrations/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"shops",
+										"registrations",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Accept Shop Registration",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjU4MDk3NCwiZXhwIjoxNzI2NTg0NTc0LCJyb2xlIjoiUk9MRV9BRE1JTiJ9.K0NCOlgXdrSkcOyqmbLoaRntYBIYCA7oeXeLLgO2prw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/shops/registrations/3/accept",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"shops",
+										"registrations",
+										"3",
+										"accept"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Decline Shop Registration",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjU4MDk3NCwiZXhwIjoxNzI2NTg0NTc0LCJyb2xlIjoiUk9MRV9BRE1JTiJ9.K0NCOlgXdrSkcOyqmbLoaRntYBIYCA7oeXeLLgO2prw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"reason\":  \"test\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/shops/registrations/2/decline",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"shops",
+										"registrations",
+										"2",
+										"decline"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Read Close Request",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjMwNTgxNSwiZXhwIjoxNzI2MzA5NDE1LCJyb2xlIjoiUk9MRV9BRE1JTiJ9.K9-CC14Gt_2bm23VlkuKOpj-8NjZ0RNidMUC9uZnsd0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/shops/close-requests/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"shops",
+										"close-requests",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Accept close request",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjU4MTU1MSwiZXhwIjoxNzI2NTg1MTUxLCJyb2xlIjoiUk9MRV9BRE1JTiJ9.HBja42yDjSpnA7WeHDQ38fmOhYiarMSwQla-DM6W86Q",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/shops/close-requests/1/approve",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"shops",
+										"close-requests",
+										"1",
+										"approve"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Shop Owner",
+					"item": [
+						{
+							"name": "Read All Shops",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcyNjYyMzgxOCwiZXhwIjoxNzI2NjI3NDE4LCJyb2xlIjoiUk9MRV9CVVNJTkVTUyJ9.MEypluV7Wr487cqyxn-9fT4hJRAMkkdsKujui0vsyIg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/shops",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"shops"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Read one shop",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcyNjU4MDIxOSwiZXhwIjoxNzI2NTgzODE5LCJyb2xlIjoiUk9MRV9CVVNJTkVTUyJ9.Vo_NkqUS7a2W2bl4ZXeFhaWqlJTU-FM0aQW_M715SRM",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/shops/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"shops",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Read registrations",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcyNjU4MTU1MSwiZXhwIjoxNzI2NTg1MTUxLCJyb2xlIjoiUk9MRV9BRE1JTiJ9.HBja42yDjSpnA7WeHDQ38fmOhYiarMSwQla-DM6W86Q",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/shops/registrations",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"shops",
+										"registrations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Read one registration",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcyNjU4MTM3OCwiZXhwIjoxNzI2NTg0OTc4LCJyb2xlIjoiUk9MRV9CVVNJTkVTUyJ9.Kv8KQqBQCniTv4YpgEA9e6fRcz81oQKiFI4utabjaUQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/shops/registrations/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"shops",
+										"registrations",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "- Read All Shops: GET /shops\n    \n- Read One Shop GET /shops/{shopId}\n    \n- Update shop info: PUT /shops/{shopId}/update-info\n    \n- Shop Register: POST / shops/{shopId}/register"
+				},
+				{
+					"name": "Shop info update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcyNjU4MDIxOSwiZXhwIjoxNzI2NTgzODE5LCJyb2xlIjoiUk9MRV9CVVNJTkVTUyJ9.Vo_NkqUS7a2W2bl4ZXeFhaWqlJTU-FM0aQW_M715SRM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"name\": \"BabaMama\",\r\n    \"description\": \"Baby Fashion.\",\r\n    \"category\": \"FASHION\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/shops/3/update-info",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shops",
+								"3",
+								"update-info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Shop Register",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcyNjU4MDIxOSwiZXhwIjoxNzI2NTgzODE5LCJyb2xlIjoiUk9MRV9CVVNJTkVTUyJ9.Vo_NkqUS7a2W2bl4ZXeFhaWqlJTU-FM0aQW_M715SRM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/shops/3/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shops",
+								"3",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Shop Close Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcyNjU4MTM3OCwiZXhwIjoxNzI2NTg0OTc4LCJyb2xlIjoiUk9MRV9CVVNJTkVTUyJ9.Kv8KQqBQCniTv4YpgEA9e6fRcz81oQKiFI4utabjaUQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"reason\": \"test\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/shops/close/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"shops",
+								"close",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "There are API test for shop activeties\n\n- Update Shop Infomation\n    \n- Shop Registration\n    \n- Shop Close Request\n    \n- Shop owner can view all/one shop registrations or shop close request of their shops.\n    \n- Admin can view one/all shop registrations\n    \n- Admin approve/decline shop registration\n    \n- Admin can view all/one shop close request\n    \n- Admin approve shop close request"
+		},
+		{
+			"name": "ITEM",
+			"item": [
+				{
+					"name": "Add item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcyNjY0MTM3MiwiZXhwIjoxNzI2NjQ0OTcyLCJyb2xlIjoiUk9MRV9CVVNJTkVTUyJ9.ueio_WPPWRscvHlGLIAViYtbGmBtHJ6O6TfHUYxVvrw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "itemFormDto",
+									"value": "{\"name\": \"Product A\", \"price\": 10000, \"description\": \"This is Product A\", \"stock\": 50, \"itemStatus\": \"ON_SALE\", \"shopId\": 1}",
+									"type": "text"
+								},
+								{
+									"key": "itemImgFileList",
+									"type": "file",
+									"src": "/C:/Users/teisspi/OneDrive/Pictures/artchair.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/items/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"items",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read all items",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcyNjY1MjY5MCwiZXhwIjoxNzI2NjU2MjkwLCJyb2xlIjoiUk9MRV9CVVNJTkVTUyJ9.99FGbvNwEp8kIkJBENwZq7cOCeuhLgy5gj0rVlRZU4s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/items/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"items",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read one item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcyNjYzMzY4NSwiZXhwIjoxNzI2NjM3Mjg1LCJyb2xlIjoiUk9MRV9CVVNJTkVTUyJ9.G-h7VvytcRTeGFOUaOaP3-WnqrzIWjxREKBzmcbY15g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/items/1/view",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"items",
+								"1",
+								"view"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcyNjY0NjIxNiwiZXhwIjoxNzI2NjQ5ODE2LCJyb2xlIjoiUk9MRV9CVVNJTkVTUyJ9.A3mM2fWFd0b1iwBwRfFgN9amPuCM2lbQAaOAUKJHVfY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "itemFormDto",
+									"value": "{\"name\": \"sofa\", \"price\": 10000, \"description\": \"modern sofa\", \"stock\": 10, \"itemStatus\": \"ON_SALE\", \"shopId\": 1}",
+									"type": "text"
+								},
+								{
+									"key": "itemImgFileList",
+									"type": "file",
+									"src": "/C:/Users/teisspi/OneDrive/Pictures/SOFA.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/items/2/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"items",
+								"2",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcyNjY1MjY5MCwiZXhwIjoxNzI2NjU2MjkwLCJyb2xlIjoiUk9MRV9CVVNJTkVTUyJ9.99FGbvNwEp8kIkJBENwZq7cOCeuhLgy5gj0rVlRZU4s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/items/2/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"items",
+								"2",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMyIsImlhdCI6MTcyNjczMDc4NywiZXhwIjoxNzI2NzM0Mzg3LCJyb2xlIjoiUk9MRV9VU0VSIn0.0Yz2zS9-0IaO8PhljxxF9kBVU8kMdEYfeI75nDlg4-U",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/items/search?name=chair&shopId=1&minPrice=0&maxPrice=10000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"items",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "chair"
+								},
+								{
+									"key": "shopId",
+									"value": "1"
+								},
+								{
+									"key": "minPrice",
+									"value": "0"
+								},
+								{
+									"key": "maxPrice",
+									"value": "10000000"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "- shop owner create item POST /items/add\n    \n- shop owner get item details GET /items/{itemId}/view\n    \n- shop owner update item PUT /items/{itemId}/update\n    \n- shop owner delete item DELETE /items/{itemId}/delete\n    \n- Admin view all items GET /items/admin\n    \n- View items by shopId GET /items/{shopId}"
+		},
+		{
+			"name": "ORDER",
+			"item": [
+				{
+					"name": "create an order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMyIsImlhdCI6MTcyNjY1OTc2MiwiZXhwIjoxNzI2NjYzMzYyLCJyb2xlIjoiUk9MRV9VU0VSIn0.E2Cj5mFGPTQ26GPa4h-uavZIZN8EfMOQoFsK4dYsvA4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderItems\": [\r\n        {\r\n            \"itemId\": 3,\r\n            \"quantity\": 2\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all order by current user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMyIsImlhdCI6MTcyNjcyNjAzNCwiZXhwIjoxNzI2NzI5NjM0LCJyb2xlIjoiUk9MRV9VU0VSIn0.rx4qZ8CW-L1Zjy6pAtR132GTQlNyGj4mrXHb_AZKJQ8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/order/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Shop owner all order byShopId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcyNjY2MDYxNSwiZXhwIjoxNzI2NjY0MjE1LCJyb2xlIjoiUk9MRV9CVVNJTkVTUyJ9.4aB7YI4d-mtcQzNP0EZyxikIfhWEZDr35odJlDdQxhc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/order/shop/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order",
+								"shop",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Shop owner get detail oreder by orderId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcyNjY2MDYxNSwiZXhwIjoxNzI2NjY0MjE1LCJyb2xlIjoiUk9MRV9CVVNJTkVTUyJ9.4aB7YI4d-mtcQzNP0EZyxikIfhWEZDr35odJlDdQxhc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/order/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Shop owenr confirm an order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcyNjY2MDYxNSwiZXhwIjoxNzI2NjY0MjE1LCJyb2xlIjoiUk9MRV9CVVNJTkVTUyJ9.4aB7YI4d-mtcQzNP0EZyxikIfhWEZDr35odJlDdQxhc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/order/1/confirm",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order",
+								"1",
+								"confirm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User cancel an order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMyIsImlhdCI6MTcyNjY2MDk0NywiZXhwIjoxNzI2NjY0NTQ3LCJyb2xlIjoiUk9MRV9VU0VSIn0.NEjofzBMFpTVPtErcxMBiDnOfrEuFL1957ZDEw4ZAkU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/order/2/cancel",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order",
+								"2",
+								"cancel"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "- User with ROLE_USER can create an order:  \n    POST /order\n    \n- User can get all/one orders  \n    GET /order/user\n    \n- Shop owner can get all order by shopId  \n    GET /order/shop/{shopId}\n    \n- Shop owner can get details of order by orderId  \n    GET /order/{orderId}\n    \n- Shop owner confirm an order  \n    PATCH /order/{orderId}/confirm\n    \n- User can cancel order if order status is \"PENDING\"  \n    PATCH /order/{orderId}/cancel"
+		},
+		{
+			"name": "CART",
+			"item": [
+				{
+					"name": "Add item to Cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMyIsImlhdCI6MTcyNjcyMjYzOCwiZXhwIjoxNzI2NzI2MjM4LCJyb2xlIjoiUk9MRV9VU0VSIn0.Zy4I39_SZ7nAxpINc0H8CosbUfolHoc5T86xUonZKSo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"itemId\": 3,\r\n    \"quantity\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/cart/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cart",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Item Quantity",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMyIsImlhdCI6MTcyNjcyMjYzOCwiZXhwIjoxNzI2NzI2MjM4LCJyb2xlIjoiUk9MRV9VU0VSIn0.Zy4I39_SZ7nAxpINc0H8CosbUfolHoc5T86xUonZKSo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/cart/update/1?quantity=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cart",
+								"update",
+								"1"
+							],
+							"query": [
+								{
+									"key": "quantity",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Item in Cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMyIsImlhdCI6MTcyNjcyMjYzOCwiZXhwIjoxNzI2NzI2MjM4LCJyb2xlIjoiUk9MRV9VU0VSIn0.Zy4I39_SZ7nAxpINc0H8CosbUfolHoc5T86xUonZKSo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/cart/delete/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cart",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View cart details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMyIsImlhdCI6MTcyNjcyMjYzOCwiZXhwIjoxNzI2NzI2MjM4LCJyb2xlIjoiUk9MRV9VU0VSIn0.Zy4I39_SZ7nAxpINc0H8CosbUfolHoc5T86xUonZKSo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/cart/details",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cart",
+								"details"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order cart items",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMyIsImlhdCI6MTcyNjcyNjAzNCwiZXhwIjoxNzI2NzI5NjM0LCJyb2xlIjoiUk9MRV9VU0VSIn0.rx4qZ8CW-L1Zjy6pAtR132GTQlNyGj4mrXHb_AZKJQ8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/cart/order?cartId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cart",
+								"order"
+							],
+							"query": [
+								{
+									"key": "cartId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "- User add item to cart  \n    POST /cart/add\n    \n- user update cart item  \n    PUT /cart/update/{cartItemId}\n    \n- user delete item in cart  \n    DELETE /cart/delete/{cartItemId}\n    \n- user view cart details  \n    GET /cart/details\n    \n- User order cart items  \n    POST /cart/order"
+		}
+	]
+}

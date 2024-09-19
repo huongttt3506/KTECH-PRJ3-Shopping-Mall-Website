@@ -5,9 +5,13 @@ import com.example.ShoppingMall.Market.cart.dto.CartItemDto;
 import com.example.ShoppingMall.Market.cart.dto.CartOrderDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -44,11 +48,16 @@ public class CartController {
         return ResponseEntity.ok(cartDetails);
     }
 
-
     @PostMapping("/order")
-    public ResponseEntity<List<Long>> orderCartItem(@RequestBody CartOrderDto cartOrderDto) {
-        List<Long> orderIds = cartService.orderCartItem(cartOrderDto);
+    public ResponseEntity<List<Long>> orderCart(@RequestParam("cartId") Long cartId) {
+        List<Long> orderIds = cartService.orderCart(cartId);
         return ResponseEntity.ok(orderIds);
     }
+
+//    @PostMapping("/order")
+//    public ResponseEntity<List<Long>> orderCartItem(@RequestBody CartOrderDto cartOrderDto) {
+//        List<Long> orderIds = cartService.orderCartItem(cartOrderDto);
+//        return ResponseEntity.ok(orderIds);
+//    }
 
 }

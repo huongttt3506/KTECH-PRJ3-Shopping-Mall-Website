@@ -97,7 +97,9 @@ public class WebSecurityConfig {
                                     "items/{itemId}/update",
                                     "items/{itemId}/delete",
                                     "items/admin",
-                                    "items/{shopId}").authenticated();
+                                    "items/{shopId}",
+                                    "items/search"
+                                    ).authenticated();
                             //endpoint for order item
                             auth.requestMatchers("/order",
                                     "/order/user",
@@ -107,6 +109,7 @@ public class WebSecurityConfig {
                                     "/order/{orderId}/cancel"
                                     ).authenticated();
                             //endpoint for cart
+                            auth.requestMatchers("/cart/**").authenticated();
 
 
                             // All different endpoints:
