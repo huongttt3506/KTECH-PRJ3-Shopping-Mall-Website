@@ -1,4 +1,4 @@
-package com.example.ShoppingMall.ShoppingMall.shop.entity;
+package com.example.ShoppingMall.Market.shop.entity;
 
 public enum ShopStatus {
     PREPARING,

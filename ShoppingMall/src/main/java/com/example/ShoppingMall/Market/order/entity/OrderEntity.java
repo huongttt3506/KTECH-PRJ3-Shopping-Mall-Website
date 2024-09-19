@@ -75,7 +75,7 @@ public class OrderEntity {
         return totalAmount;
     }
 
-    // Change order status to cancelled
+    // Change order status to "CANCELED"
     public void cancelOrder() {
         this.orderStatus = OrderStatus.CANCELED;
         for (OrderItemEntity orderItem : orderItems) {

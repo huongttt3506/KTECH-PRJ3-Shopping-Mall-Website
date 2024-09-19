@@ -2,15 +2,13 @@ package com.example.ShoppingMall.Market.order.dto;
 
 import com.example.ShoppingMall.Market.order.entity.OrderEntity;
 import com.example.ShoppingMall.Market.order.entity.OrderStatus;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.SecondaryRow;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
-
+@Setter
 @Getter
 @Builder
 @NoArgsConstructor

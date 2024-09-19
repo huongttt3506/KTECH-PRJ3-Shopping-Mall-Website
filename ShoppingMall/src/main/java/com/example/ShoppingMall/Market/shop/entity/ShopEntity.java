@@ -1,10 +1,9 @@
-package com.example.ShoppingMall.ShoppingMall.shop.entity;
+package com.example.ShoppingMall.Market.shop.entity;
 
-import com.example.ShoppingMall.user.entity.BusinessRegistration;
+import com.example.ShoppingMall.Market.item.entity.ItemEntity;
 import com.example.ShoppingMall.user.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.core.userdetails.User;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -39,5 +38,9 @@ public class ShopEntity {
     // List of close requests associated with this shop
     @OneToMany(mappedBy = "shop")
     private List<ShopCloseRequest> closeRequests;
+
+    //List of items in the shop
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemEntity> items; // List of items associated with this shop
 
 }

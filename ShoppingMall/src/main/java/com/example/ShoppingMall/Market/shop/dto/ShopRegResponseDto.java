@@ -1,6 +1,6 @@
-package com.example.ShoppingMall.ShoppingMall.shop.dto;
+package com.example.ShoppingMall.Market.shop.dto;
 
-import com.example.ShoppingMall.ShoppingMall.shop.entity.*;
+import com.example.ShoppingMall.Market.shop.entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

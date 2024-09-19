@@ -1,12 +1,9 @@
-package com.example.ShoppingMall.ShoppingMall.shop.dto;
+package com.example.ShoppingMall.Market.shop.dto;
 
-import com.example.ShoppingMall.ShoppingMall.shop.entity.ShopCategory;
-import com.example.ShoppingMall.ShoppingMall.shop.entity.ShopCloseRequest;
-import com.example.ShoppingMall.ShoppingMall.shop.entity.ShopEntity;
-import com.example.ShoppingMall.ShoppingMall.shop.entity.ShopStatus;
-import com.example.ShoppingMall.user.dto.BusinessRegistrationDto;
-import com.example.ShoppingMall.user.entity.BusinessRegistration;
-import com.example.ShoppingMall.user.entity.UserEntity;
+import com.example.ShoppingMall.Market.shop.entity.ShopCategory;
+import com.example.ShoppingMall.Market.shop.entity.ShopCloseRequest;
+import com.example.ShoppingMall.Market.shop.entity.ShopEntity;
+import com.example.ShoppingMall.Market.shop.entity.ShopStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

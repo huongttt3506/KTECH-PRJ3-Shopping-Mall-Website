@@ -1,6 +1,6 @@
-package com.example.ShoppingMall.ShoppingMall.shop;
+package com.example.ShoppingMall.Market.shop;
 
-import com.example.ShoppingMall.ShoppingMall.shop.dto.*;
+import com.example.ShoppingMall.Market.shop.dto.*;
 import com.example.ShoppingMall.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

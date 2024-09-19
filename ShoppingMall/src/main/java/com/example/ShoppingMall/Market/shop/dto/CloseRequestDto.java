@@ -1,9 +1,6 @@
-package com.example.ShoppingMall.ShoppingMall.shop.dto;
+package com.example.ShoppingMall.Market.shop.dto;
 
-import com.example.ShoppingMall.ShoppingMall.shop.entity.ShopCategory;
-import com.example.ShoppingMall.ShoppingMall.shop.entity.ShopCloseRequest;
-import com.example.ShoppingMall.ShoppingMall.shop.entity.ShopEntity;
-import com.example.ShoppingMall.ShoppingMall.shop.entity.ShopStatus;
+import com.example.ShoppingMall.Market.shop.entity.ShopCloseRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

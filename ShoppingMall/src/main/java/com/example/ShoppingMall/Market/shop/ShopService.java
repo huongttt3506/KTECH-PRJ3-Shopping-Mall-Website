@@ -1,18 +1,17 @@
-package com.example.ShoppingMall.ShoppingMall.shop;
+package com.example.ShoppingMall.Market.shop;
 
 import com.example.ShoppingMall.AuthenticationFacade;
-import com.example.ShoppingMall.ShoppingMall.shop.dto.*;
-import com.example.ShoppingMall.ShoppingMall.shop.entity.*;
-import com.example.ShoppingMall.ShoppingMall.shop.repo.ShopCloseRepository;
-import com.example.ShoppingMall.ShoppingMall.shop.repo.ShopRegRepository;
-import com.example.ShoppingMall.ShoppingMall.shop.repo.ShopRepository;
+import com.example.ShoppingMall.Market.shop.dto.*;
+import com.example.ShoppingMall.Market.shop.entity.*;
+import com.example.ShoppingMall.Market.shop.repo.ShopCloseRepository;
+import com.example.ShoppingMall.Market.shop.repo.ShopRegRepository;
+import com.example.ShoppingMall.Market.shop.repo.ShopRepository;
 import com.example.ShoppingMall.user.dto.UserDto;
 import com.example.ShoppingMall.user.entity.UserEntity;
 import com.example.ShoppingMall.user.entity.UserRole;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;

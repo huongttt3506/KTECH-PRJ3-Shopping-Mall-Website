@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -16,9 +17,14 @@ public class OrderController {
     private final OrderService orderService;
     // Create an order
     @PostMapping
-    public ResponseEntity<Long> createOrder(@RequestBody RequestOrderDto requestOrderDto) {
-        Long orderId = orderService.createOrder(requestOrderDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
+    public ResponseEntity<List<Long>> createOrder(@RequestBody RequestOrderDto requestOrderDto) {
+        try {
+            // create order id for each shop
+            List<Long> orderIds = orderService.createOrdersForEachShop(requestOrderDto);
+            return ResponseEntity.ok(orderIds);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Collections.emptyList());
+        }
     }
 
     // Get all orders by current user

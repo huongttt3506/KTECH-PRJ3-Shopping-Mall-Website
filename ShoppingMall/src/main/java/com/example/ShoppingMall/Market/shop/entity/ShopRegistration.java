@@ -1,4 +1,4 @@
-package com.example.ShoppingMall.ShoppingMall.shop.entity;
+package com.example.ShoppingMall.Market.shop.entity;
 
 import com.example.ShoppingMall.user.entity.UserEntity;
 import jakarta.persistence.*;

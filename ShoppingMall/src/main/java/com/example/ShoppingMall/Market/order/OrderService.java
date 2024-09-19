@@ -15,42 +15,17 @@ import com.example.ShoppingMall.user.entity.UserRole;
 import com.example.ShoppingMall.user.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.ArrayList;
-import java.util.List;
-
-
-import com.example.ShoppingMall.AuthenticationFacade;
-import com.example.ShoppingMall.Market.item.entity.ItemEntity;
-import com.example.ShoppingMall.Market.item.repo.ItemRepository;
 import com.example.ShoppingMall.Market.order.dto.OrderDto;
-import com.example.ShoppingMall.Market.order.dto.OrderItemDto;
-import com.example.ShoppingMall.Market.order.entity.OrderEntity;
-import com.example.ShoppingMall.Market.order.entity.OrderItemEntity;
-import com.example.ShoppingMall.Market.order.entity.OrderStatus;
-import com.example.ShoppingMall.Market.order.repo.OrderItemRepository;
-import com.example.ShoppingMall.Market.order.repo.OrderRepository;
-import com.example.ShoppingMall.Market.shop.entity.ShopEntity;
-import com.example.ShoppingMall.Market.shop.repo.ShopRepository;
-import com.example.ShoppingMall.user.entity.UserEntity;
-import com.example.ShoppingMall.user.entity.UserRole;
-import com.example.ShoppingMall.user.repo.UserRepository;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 
 @Slf4j
 @Service
@@ -64,84 +39,85 @@ public class OrderService {
     private final ShopRepository shopRepository;
     private final AuthenticationFacade facade;
 
-    // User Create an Order
-    public Long createOrder(RequestOrderDto requestOrderDto) {
-        //Check permission
+    // create orders for each shop
+    public List<Long> createOrdersForEachShop(RequestOrderDto requestOrderDto) {
+        // check role
         UserEntity currentUser = facade.getCurrentUserEntity();
         if (currentUser.getRole().equals(UserRole.ROLE_INACTIVE)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
                     "You must update basic information to activate your account.");
         }
-
-        // Create OrderItem list from requestOrderDto
-        List<OrderItemEntity> orderItemList = new ArrayList<>();
-
+        //Group items by shop
+        Map<ShopEntity, List<OrderItemEntity>> itemsByShop = new HashMap<>();
         for (OrderItemRequestDto orderItemRequestDto : requestOrderDto.getOrderItems()) {
-            // find item by itemId
             ItemEntity item = itemRepository.findById(orderItemRequestDto.getItemId())
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item not found"));
 
-            // Create OrderItem by item và quantity
             OrderItemEntity orderItem = OrderItemEntity.createOrderItem(item, orderItemRequestDto.getQuantity());
-            orderItem.setShop(item.getShop());
-            orderItemList.add(orderItem);
+            ShopEntity shop = item.getShop();
+
+            itemsByShop.computeIfAbsent(shop, k -> new ArrayList<>()).add(orderItem);
         }
 
-        //
-        OrderEntity order = OrderEntity.createOrder(currentUser, orderItemList);
-        order.setShop(orderItemList.get(0).getItem().getShop());
+        //Create order for each shop
+        List<Long> orderIds = new ArrayList<>();
+        for (Map.Entry<ShopEntity, List<OrderItemEntity>> entry : itemsByShop.entrySet()) {
+            ShopEntity shop = entry.getKey();
+            List<OrderItemEntity> orderItemList = entry.getValue();
 
-        // set total amount
-        int totalAmount = order.getTotalAmount();
-        order.setTotalAmount(totalAmount);
+            OrderEntity order = OrderEntity.createOrder(currentUser, orderItemList);
+            order.setShop(shop);
+            order.setTotalAmount(order.getTotalAmount());
 
-        // save to order entity
-        orderRepository.save(order);
-
-        // save each orderItem to OrderItemEntity
-        for (OrderItemEntity orderItem : orderItemList) {
-            orderItem.setOrder(order);
-            orderItemRepository.save(orderItem);
+            orderRepository.save(order);
+            for (OrderItemEntity orderItem : orderItemList) {
+                orderItem.setOrder(order);
+                orderItemRepository.save(orderItem);
+            }
+            orderIds.add(order.getId());
         }
-        return order.getId();
+
+        return orderIds;
     }
-//    public Long createOrder(OrderDto orderDto) {
+//    // User Create an Order
+//    public Long createOrder(RequestOrderDto requestOrderDto) {
+//        //Check permission
 //        UserEntity currentUser = facade.getCurrentUserEntity();
 //        if (currentUser.getRole().equals(UserRole.ROLE_INACTIVE)) {
 //            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
 //                    "You must update basic information to activate your account.");
 //        }
 //
-//        // Get shopId, userId
-//        Long shopId = orderDto.getShopId();
-//        Long userId = orderDto.getUserId();
-//
-//        // Find user
-//        UserEntity user = userRepository.findById(userId)
-//                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
-//
-//        // Find shop
-//        ShopEntity shop = shopRepository.findById(shopId)
-//                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Shop not found"));
-//
-//        // Create order item list
+//        // Create OrderItem list from requestOrderDto
 //        List<OrderItemEntity> orderItemList = new ArrayList<>();
-//        for (OrderItemDto orderItemDto : orderDto.getOrderItems()) {
-//            ItemEntity item = itemRepository.findById(orderItemDto.getItemId())
+//
+//        for (OrderItemRequestDto orderItemRequestDto : requestOrderDto.getOrderItems()) {
+//            // find item by itemId
+//            ItemEntity item = itemRepository.findById(orderItemRequestDto.getItemId())
 //                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item not found"));
 //
-//            OrderItemEntity orderItem = OrderItemEntity.createOrderItem(item, orderItemDto.getQuantity());
-//            orderItem.setShop(shop);
+//            // Create OrderItem by item và quantity
+//            OrderItemEntity orderItem = OrderItemEntity.createOrderItem(item, orderItemRequestDto.getQuantity());
+//            orderItem.setShop(item.getShop());
 //            orderItemList.add(orderItem);
 //        }
 //
-//        // Create order
-//        OrderEntity order = OrderEntity.createOrder(user, orderItemList);
-//        order.setShop(shop);
+//        //
+//        OrderEntity order = OrderEntity.createOrder(currentUser, orderItemList);
+//        order.setShop(orderItemList.get(0).getItem().getShop());
 //
-//        // Save order
+//        // set total amount
+//        int totalAmount = order.getTotalAmount();
+//        order.setTotalAmount(totalAmount);
+//
+//        // save to order entity
 //        orderRepository.save(order);
 //
+//        // save each orderItem to OrderItemEntity
+//        for (OrderItemEntity orderItem : orderItemList) {
+//            orderItem.setOrder(order);
+//            orderItemRepository.save(orderItem);
+//        }
 //        return order.getId();
 //    }
 
