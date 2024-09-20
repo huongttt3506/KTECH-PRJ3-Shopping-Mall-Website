@@ -1,12 +1,17 @@
-let loggedIn = false;
-const setUserInfo = userInfo => {
+// user is not login now
+let loggedIn = false; 
+
+const setUserInfo = userInfo => 
+    {
     const imageElem = document.createElement("img");
     imageElem.className = "img-thumbnail rounded";
-    imageElem.src = userInfo.profileImagePath ?? "/static/img/user.png";
-    imageContainer.innerHTML = "";
-    imageContainer.appendChild(imageElem);
+    imageElem.src = userInfo.profileImagePath ?? "/static/img/user.jpg";
 
-    document.getElementById("greeting").innerText = `WellCome, ${userInfo.nickname ?? userInfo.username}.`
+    const imgContainer = document.getElementById("img-container");
+    imgContainer.innerHTML = "";
+    imgContainer.appendChild(imageElem);
+
+    document.getElementById("greeting").innerText = `Wellcome, ${userInfo.nickname ?? userInfo.username}.`
     const UserRole = {
         INACTIVE: "ROLE_INACTIVE",
         USER: "ROLE_USER",
@@ -33,24 +38,30 @@ const setUserInfo = userInfo => {
     else summary.innerText = "You are: INACTIVE";
 }
 
+
 const setBaseView = () => {
-    if (loggedIn) document.getElementById("authenticated").classList("d-none");
-    else document.getElementById("anonymous").classList.add("d-none");
-}
-
-const jwt = localStorage.getItem("token");
-if (jwt) {
+    if (loggedIn) document.getElementById("authenticated").classList.remove("d-none");
+    else document.getElementById("anonymous").classList.remove("d-none");
+  }
+  
+  const jwt = localStorage.getItem("token");
+  if (jwt) {
     fetch("/users/get-user-info", {
-        headers: {
-            "Authentication": `Bearer ${jwt}`,
-        },
+      headers: {
+        "Authorization": `Bearer ${jwt}`,
+      },
     })
-    .then(setUserInfo);
-}
-else setBaseView();
-
-const logoutButton = document.getElementById("loggout-button");
-logoutButton.addEventListener("click", e => {
+        .then(response => {
+          loggedIn = response.ok;
+          if (!loggedIn) localStorage.removeItem("token");
+          setBaseView();
+          return response.json();
+        })
+        .then(setUserInfo);
+  } else setBaseView();
+  
+  const logoutButton = document.getElementById("logout-button");
+  logoutButton.addEventListener("click", e => {
     if (loggedIn) localStorage.removeItem("token");
     location.href = "/views";
-});
+  });

@@ -1,9 +1,9 @@
 const jwt = localStorage.getItem("token") ?? null;
 if (jwt) fetch("/users/get-user-info"), {
-    Headers: {
+    headers: {
         "Authorization": `Bearer: ${jwt}`,
     },
-}).then(response => {
+}.then(response => {
     if (response.ok) location.href = "/views";
 })
 
@@ -15,7 +15,7 @@ signupForm.addEventListener("submit", e => {
     e.preventDefault();
     const username = usernameInput.value;
     const password = passwordInput.value;
-    const confirmPassword = passCheckInput.value;
+    const confirmPassword = confirmPassInput.value;
     fetch("/users/register", {
     method: "POST",
     headers: {
