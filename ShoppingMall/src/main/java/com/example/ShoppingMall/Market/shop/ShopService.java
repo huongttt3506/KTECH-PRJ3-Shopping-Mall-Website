@@ -1,6 +1,6 @@
 package com.example.ShoppingMall.Market.shop;
 
-import com.example.ShoppingMall.AuthenticationFacade;
+import com.example.ShoppingMall.user.AuthenticationFacade;
 import com.example.ShoppingMall.Market.shop.dto.*;
 import com.example.ShoppingMall.Market.shop.entity.*;
 import com.example.ShoppingMall.Market.shop.repo.ShopCloseRepository;

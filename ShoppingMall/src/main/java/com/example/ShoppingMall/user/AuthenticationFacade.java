@@ -1,4 +1,4 @@
-package com.example.ShoppingMall;
+package com.example.ShoppingMall.user;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 // a utility class to get current user information from SecurityContext in Spring Security
 public class AuthenticationFacade {
+
     private final UserRepository userRepository;
+
     public UserEntity getCurrentUserEntity() {
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();

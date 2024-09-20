@@ -102,4 +102,10 @@ public class UserController {
         return "Business registration declined.";
     }
 
+    //
+    @GetMapping("get-user-info")
+    public UserDto getUserInfo() {
+        return userService.getUserInfo();
+    }
+
 }

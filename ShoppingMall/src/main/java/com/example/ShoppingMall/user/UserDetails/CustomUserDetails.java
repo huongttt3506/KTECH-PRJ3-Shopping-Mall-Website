@@ -3,6 +3,7 @@ package com.example.ShoppingMall.user.UserDetails;
 
 import com.example.ShoppingMall.user.entity.UserEntity;
 import com.example.ShoppingMall.user.entity.UserRole;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -11,6 +12,7 @@ import java.util.Collections;
 
 
 
+@Getter
 public class CustomUserDetails implements UserDetails {
     private final UserEntity userEntity;
 
@@ -54,8 +56,5 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return userEntity.getRole() != UserRole.ROLE_INACTIVE;
-    }
-    public UserEntity getUserEntity() {
-        return userEntity;
     }
 }

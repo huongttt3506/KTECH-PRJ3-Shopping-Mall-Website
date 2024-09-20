@@ -1,6 +1,6 @@
 package com.example.ShoppingMall.Market.item.service;
 
-import com.example.ShoppingMall.AuthenticationFacade;
+import com.example.ShoppingMall.user.AuthenticationFacade;
 import com.example.ShoppingMall.Market.item.dto.*;
 import com.example.ShoppingMall.Market.item.entity.ItemEntity;
 import com.example.ShoppingMall.Market.item.entity.ItemImg;

@@ -1,9 +1,8 @@
 package com.example.ShoppingMall.Market.cart;
 
-import com.example.ShoppingMall.AuthenticationFacade;
+import com.example.ShoppingMall.user.AuthenticationFacade;
 import com.example.ShoppingMall.Market.cart.dto.CartDetailsDto;
 import com.example.ShoppingMall.Market.cart.dto.CartItemDto;
-import com.example.ShoppingMall.Market.cart.dto.CartOrderDto;
 import com.example.ShoppingMall.Market.cart.entity.CartEntity;
 import com.example.ShoppingMall.Market.cart.entity.CartItemEntity;
 import com.example.ShoppingMall.Market.cart.repo.CartItemRepository;

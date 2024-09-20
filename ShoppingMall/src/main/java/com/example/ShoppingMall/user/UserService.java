@@ -1,5 +1,4 @@
 package com.example.ShoppingMall.user;
-import com.example.ShoppingMall.AuthenticationFacade;
 import com.example.ShoppingMall.service.FileService;
 import com.example.ShoppingMall.Market.shop.entity.ShopEntity;
 import com.example.ShoppingMall.Market.shop.entity.ShopStatus;
@@ -326,5 +325,10 @@ public class UserService {
         // Delete the registration request
         businessRepository.deleteById(id);
         log.info("delete declined business registration success!");
+    }
+
+    //Current user
+    public UserDto getUserInfo() {
+        return UserDto.fromEntity(facade.getCurrentUserEntity());
     }
 }

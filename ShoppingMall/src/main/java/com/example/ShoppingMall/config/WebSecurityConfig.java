@@ -46,6 +46,7 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         auth -> {
+
                             auth.requestMatchers(
                                             "/users/login",
                                             "/users/register"
@@ -110,6 +111,8 @@ public class WebSecurityConfig {
                                     ).authenticated();
                             //endpoint for cart
                             auth.requestMatchers("/cart/**").authenticated();
+                            auth.requestMatchers("/error", "/static/**", "/views/**", "/")
+                                    .permitAll();
 
 
                             // All different endpoints:
